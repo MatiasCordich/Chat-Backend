@@ -18,6 +18,7 @@ app.use(express.json())
 
 app.use('/api/auth', userRoutes)
 app.use('/api/messages', messageRoutes)
+app.get('/', (req, res) => {res.send({mensaje: "Server rendering"})})
 
 // Conectandome a la DB
 

@@ -11,7 +11,12 @@ const socket = require('socket.io')
 
 // Seteando el server
 
-app.use(cors())
+const corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 
 // Defininiemdo las rutas

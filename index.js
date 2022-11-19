@@ -1,12 +1,14 @@
 // Exportacion de todas la variables necesarias
 const express = require('express')
 const cors = require('cors')
+const http = require('http')
 const mongoose = require("mongoose")
 const userRoutes = require('./routes/userRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 require('dotenv').config()
 
 const app = express()
+const server = http.createServer(app)
 const socket = require('socket.io')
 
 // Seteando el server
@@ -38,7 +40,7 @@ mongoose.connect(process.env.MONGO_URL, options)
 
 // Inciando el server local
 
-const server = app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server connected on PORT ${process.env.PORT}`)
 })
 
@@ -46,7 +48,7 @@ const server = app.listen(process.env.PORT, () => {
 
 const io = socket(server, {
     cors:{
-        origin:"https://chat-frontend-hazel.vercel.app",
+        origin:"https://chat-frontend-hazel.vercel.app/",
         credentials: true,
     }
 })

@@ -8,8 +8,7 @@ const messageRoutes = require('./routes/messageRoutes')
 require('dotenv').config()
 
 const app = express()
-const server = http.createServer(app)
-const socket = require('socket.io')
+const {Server} = require('socket.io')
 
 // Seteando el server
 
@@ -46,9 +45,11 @@ app.listen(process.env.PORT, () => {
 
 // Incializando socket
 
-const io = socket(server, {
+const socketServer = http.createServer(app)
+
+const io = new Server(socketServer, {
     cors:{
-        origin:"https://chat-frontend-hazel.vercel.app/",
+        origin:"https://chat-frontend-hazel.vercel.app",
         credentials: true,
     }
 })
